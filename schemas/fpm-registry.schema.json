@@ -1,0 +1,95 @@
+{
+  "$defs": {
+    "RegistryVersionEntry": {
+      "properties": {
+        "version": {
+          "description": "Package version",
+          "title": "Version",
+          "type": "string"
+        },
+        "tarball_url": {
+          "description": "Relative or absolute URL to tarball",
+          "title": "Tarball Url",
+          "type": "string"
+        },
+        "integrity": {
+          "description": "SHA-256 digest prefixed with sha256-",
+          "title": "Integrity",
+          "type": "string"
+        },
+        "funnelscript_version": {
+          "default": ">=0.1.0",
+          "description": "Compatible engine constraint",
+          "title": "Funnelscript Version",
+          "type": "string"
+        },
+        "dependencies": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Package dependencies",
+          "title": "Dependencies",
+          "type": "object"
+        },
+        "entry": {
+          "default": "index.fnl",
+          "description": "Entry file",
+          "title": "Entry",
+          "type": "string"
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "ISO timestamp",
+          "title": "Published At"
+        }
+      },
+      "required": [
+        "version",
+        "tarball_url",
+        "integrity"
+      ],
+      "title": "RegistryVersionEntry",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "name": {
+      "description": "Scoped package name",
+      "title": "Name",
+      "type": "string"
+    },
+    "description": {
+      "default": "",
+      "description": "Package description",
+      "title": "Description",
+      "type": "string"
+    },
+    "latest": {
+      "description": "Latest stable version",
+      "title": "Latest",
+      "type": "string"
+    },
+    "versions": {
+      "additionalProperties": {
+        "$ref": "#/$defs/RegistryVersionEntry"
+      },
+      "description": "Available published versions",
+      "title": "Versions",
+      "type": "object"
+    }
+  },
+  "required": [
+    "name",
+    "latest"
+  ],
+  "title": "RegistryPackageIndex",
+  "type": "object"
+}

@@ -1,0 +1,294 @@
+{
+  "$defs": {
+    "GitDependency": {
+      "additionalProperties": false,
+      "properties": {
+        "git": {
+          "description": "Git repository URL",
+          "title": "Git",
+          "type": "string"
+        },
+        "rev": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Commit hash, tag, or branch",
+          "title": "Rev"
+        },
+        "version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Optional SemVer constraint",
+          "title": "Version"
+        }
+      },
+      "required": [
+        "git"
+      ],
+      "title": "GitDependency",
+      "type": "object"
+    },
+    "MetricSpec": {
+      "properties": {
+        "dimension": {
+          "description": "Dimensional type of simulation output",
+          "title": "Dimension",
+          "type": "string"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Unit of measurement",
+          "title": "Unit"
+        },
+        "description": {
+          "description": "Metric summary",
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "dimension",
+        "description"
+      ],
+      "title": "MetricSpec",
+      "type": "object"
+    },
+    "PackageMetadata": {
+      "properties": {
+        "name": {
+          "description": "Scoped package identifier (e.g. 'ecommerce/d2c_scale')",
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "description": "Strict SemVer 2.0 version",
+          "title": "Version",
+          "type": "string"
+        },
+        "description": {
+          "description": "Package summary",
+          "title": "Description",
+          "type": "string"
+        },
+        "license": {
+          "default": "MIT",
+          "description": "SPDX license identifier",
+          "title": "License",
+          "type": "string"
+        },
+        "author": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Author / Organization details",
+          "title": "Author"
+        },
+        "funnelscript_version": {
+          "default": ">=0.1.0",
+          "description": "Target FunnelScript compiler engine constraint",
+          "title": "Funnelscript Version",
+          "type": "string"
+        },
+        "main": {
+          "default": "index.fnl",
+          "description": "Path to primary FunnelScript entry file",
+          "title": "Main",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "description"
+      ],
+      "title": "PackageMetadata",
+      "type": "object"
+    },
+    "ParameterSpec": {
+      "properties": {
+        "type": {
+          "description": "Parameter primitive type",
+          "enum": [
+            "float",
+            "int",
+            "str",
+            "bool"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "dimension": {
+          "description": "FunnelScript dimensional quantity or Scalar",
+          "title": "Dimension",
+          "type": "string"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Physical / financial unit",
+          "title": "Unit"
+        },
+        "default": {
+          "description": "Default value",
+          "title": "Default"
+        },
+        "min": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Lower bound",
+          "title": "Min"
+        },
+        "max": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Upper bound",
+          "title": "Max"
+        },
+        "description": {
+          "description": "Human-readable parameter documentation",
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "dimension",
+        "default",
+        "description"
+      ],
+      "title": "ParameterSpec",
+      "type": "object"
+    },
+    "PathDependency": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "description": "Relative filesystem path to package directory",
+          "title": "Path",
+          "type": "string"
+        },
+        "version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Optional SemVer constraint",
+          "title": "Version"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "title": "PathDependency",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "package": {
+      "$ref": "#/$defs/PackageMetadata"
+    },
+    "exports": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Exports",
+      "type": "object"
+    },
+    "parameters": {
+      "additionalProperties": {
+        "$ref": "#/$defs/ParameterSpec"
+      },
+      "title": "Parameters",
+      "type": "object"
+    },
+    "metrics": {
+      "additionalProperties": {
+        "$ref": "#/$defs/MetricSpec"
+      },
+      "title": "Metrics",
+      "type": "object"
+    },
+    "dependencies": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "$ref": "#/$defs/PathDependency"
+          },
+          {
+            "$ref": "#/$defs/GitDependency"
+          }
+        ],
+        "description": "Dependency specifier"
+      },
+      "title": "Dependencies",
+      "type": "object"
+    }
+  },
+  "required": [
+    "package"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

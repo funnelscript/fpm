@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "latest"
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.11
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Code Quality (ruff check)
+        run: uv run ruff check .
+
+      - name: Code Formatting (ruff format)
+        run: uv run ruff format --check .
+
+      - name: Run Test Suite (pytest + hypothesis)
+        run: uv run pytest -v
+
+      - name: Schema Drift Check
+        run: |
+          uv run python -c "
+          import json
+          from pathlib import Path
+          from fpm.models.manifest import Manifest
+          from fpm.models.lockfile import Lockfile
+          from fpm.models.registry import RegistryPackageIndex
+
+          schemas_dir = Path('schemas')
+          assert json.loads((schemas_dir / 'fpm-manifest.schema.json').read_text()) == Manifest.model_json_schema()
+          assert json.loads((schemas_dir / 'fpm-lock.schema.json').read_text()) == Lockfile.model_json_schema()
+          assert json.loads((schemas_dir / 'fpm-registry.schema.json').read_text()) == RegistryPackageIndex.model_json_schema()
+          print('Schemas in sync.')
+          "

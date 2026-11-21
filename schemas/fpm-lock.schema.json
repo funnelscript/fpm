@@ -1,0 +1,76 @@
+{
+  "$defs": {
+    "LockedPackage": {
+      "properties": {
+        "name": {
+          "description": "Scoped package identifier",
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "description": "Exact resolved SemVer version",
+          "title": "Version",
+          "type": "string"
+        },
+        "resolved": {
+          "description": "Source location (tarball URL, local path, or git URI)",
+          "title": "Resolved",
+          "type": "string"
+        },
+        "integrity": {
+          "description": "Cryptographic SHA-256 digest prefixed with 'sha256-'",
+          "title": "Integrity",
+          "type": "string"
+        },
+        "entry": {
+          "default": "index.fnl",
+          "description": "Relative path to package entry point",
+          "title": "Entry",
+          "type": "string"
+        },
+        "dependencies": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Direct dependency names mapped to exact resolved versions",
+          "title": "Dependencies",
+          "type": "object"
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "resolved",
+        "integrity"
+      ],
+      "title": "LockedPackage",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "lockfile_version": {
+      "default": 1,
+      "description": "Lockfile format version",
+      "title": "Lockfile Version",
+      "type": "integer"
+    },
+    "manifest_hash": {
+      "description": "SHA-256 digest of fpm.toml when lockfile was generated",
+      "title": "Manifest Hash",
+      "type": "string"
+    },
+    "packages": {
+      "additionalProperties": {
+        "$ref": "#/$defs/LockedPackage"
+      },
+      "description": "Resolved package entries indexed by scoped name or name@version",
+      "title": "Packages",
+      "type": "object"
+    }
+  },
+  "required": [
+    "manifest_hash"
+  ],
+  "title": "Lockfile",
+  "type": "object"
+}
