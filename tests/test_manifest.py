@@ -26,11 +26,11 @@ def test_valid_package_metadata():
         description="D2C scale model",
         license="MIT",
         funnelscript_version=">=0.4.0",
-        entry="index.fnl",
+        entry="index.fnls",
     )
     assert pkg.name == "ecommerce/d2c_scale"
     assert pkg.version == "1.2.3"
-    assert pkg.entry == "index.fnl"
+    assert pkg.entry == "index.fnls"
 
 
 def test_invalid_package_name():
@@ -113,11 +113,11 @@ def test_manifest_roundtrip_file(tmp_path: Path):
         description="Sample package",
         license="Apache-2.0",
         funnelscript_version=">=0.4.0",
-        entry="main.fnl",
+        entry="main.fnls",
     )
     manifest = Manifest(
         package=meta,
-        modules={"main": "main.fnl", "utils": "utils.fnl"},
+        modules={"main": "main.fnls", "utils": "utils.fnls"},
         parameters={
             "spend": ParameterSpec(
                 type="float",
@@ -141,8 +141,8 @@ def test_manifest_roundtrip_file(tmp_path: Path):
     loaded = Manifest.load_from_file(manifest_file)
     assert loaded.name == "test/sample"
     assert loaded.version == "0.1.0"
-    assert loaded.entry == "main.fnl"
-    assert loaded.modules["utils"] == "utils.fnl"
+    assert loaded.entry == "main.fnls"
+    assert loaded.modules["utils"] == "utils.fnls"
     assert "spend" in loaded.parameters
     assert isinstance(loaded.dependencies["dep/local"], PathDependency)
     assert loaded.dependencies["dep/local"].path == "../other_pkg"

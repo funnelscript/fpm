@@ -12,7 +12,7 @@ def test_lockfile_canonical_determinism():
         version="0.1.0",
         resolved="https://registry.funnelscript.org/leadgen-sales_capacity-0.1.0.tar.gz",
         integrity="sha256-abcdef1234567890",
-        entry="index.fnl",
+        entry="index.fnls",
         dependencies={"ecommerce/d2c_scale": "^0.1.0"},
     )
     pkg2 = LockedPackage(
@@ -20,7 +20,7 @@ def test_lockfile_canonical_determinism():
         version="0.1.0",
         resolved="https://registry.funnelscript.org/ecommerce-d2c_scale-0.1.0.tar.gz",
         integrity="sha256-1234567890abcdef",
-        entry="index.fnl",
+        entry="index.fnls",
         dependencies={},
     )
 
@@ -54,7 +54,7 @@ def test_lockfile_save_and_load(tmp_path: Path):
         version="1.0.0",
         resolved="file://local",
         integrity="sha256-test",
-        entry="index.fnl",
+        entry="index.fnls",
     )
     lock = Lockfile(
         lockfile_version=1,

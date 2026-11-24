@@ -21,7 +21,7 @@
       "version": "0.1.0",
       "resolved": "https://registry.funnelscript.org/tarballs/ecommerce/d2c_scale-0.1.0.tar.gz",
       "integrity": "sha256-d7a8fbb56e13b0a04718534839cf1396b29f0e132952541a73dd708535a7b0a7",
-      "entry": "index.fnl",
+      "entry": "index.fnls",
       "dependencies": {}
     }
   }
@@ -36,7 +36,7 @@
   - `version`: Exact resolved SemVer.
   - `resolved`: Source URL, relative path, or git URI.
   - `integrity`: SHA-256 hash prefixed with `sha256-`. For path dependencies, it represents the recursive content hash of package files.
-  - `entry`: Relative path to main `.fnl` file.
+  - `entry`: Relative path to main `.fnls` file.
   - `dependencies`: Direct dependencies of this resolved package (`name` -> `constraint`).
 
 ---

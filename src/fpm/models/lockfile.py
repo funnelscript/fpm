@@ -16,7 +16,7 @@ class LockedPackage(BaseModel):
     version: str = Field(..., description="Exact resolved SemVer version")
     resolved: str = Field(..., description="Source location (tarball URL, local path, or git URI)")
     integrity: str = Field(..., description="Cryptographic SHA-256 digest prefixed with 'sha256-'")
-    entry: str = Field(default="index.fnl", description="Relative path to package entry point")
+    entry: str = Field(default="index.fnls", description="Relative path to package entry point")
     dependencies: dict[str, str] = Field(
         default_factory=dict,
         description="Direct dependency names mapped to exact resolved versions",

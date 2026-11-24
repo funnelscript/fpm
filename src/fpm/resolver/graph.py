@@ -21,7 +21,7 @@ class ResolvedNode:
     version: str
     resolved: str
     integrity: str
-    entry: str = "index.fnl"
+    entry: str = "index.fnls"
     dependencies: dict[str, str] = field(default_factory=dict)
     modules: dict[str, str] = field(default_factory=dict)
     local_dir: str | None = None
@@ -168,7 +168,7 @@ class DependencyResolver:
 
         # Hash files in directory deterministically
         hasher = hashlib.sha256()
-        for f in sorted(p.rglob("*.fnl")):
+        for f in sorted(p.rglob("*.fnls")):
             hasher.update(f.relative_to(p).as_posix().encode("utf-8"))
             hasher.update(f.read_bytes())
         digest = f"sha256-{hasher.hexdigest()}"

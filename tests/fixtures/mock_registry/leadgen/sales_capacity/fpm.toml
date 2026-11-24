@@ -5,14 +5,14 @@ description = "Flagship FunnelScript High-Ticket Lead Generation & Sales Capacit
 author = "FunnelScript Core Team <core@funnelscript.org>"
 license = "MIT"
 funnelscript_version = ">=0.4.0"
-main = "index.fnl"
+main = "index.fnls"
 
 [modules]
-acquisition = "acquisition.fnl"
-queue_and_sla = "queue_and_sla.fnl"
-pipeline_and_hiring = "pipeline_and_hiring.fnl"
-economics = "economics.fnl"
-index = "index.fnl"
+acquisition = "acquisition.fnls"
+queue_and_sla = "queue_and_sla.fnls"
+pipeline_and_hiring = "pipeline_and_hiring.fnls"
+economics = "economics.fnls"
+index = "index.fnls"
 
 [parameters.base_daily_ad_spend]
 type = "float"

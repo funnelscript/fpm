@@ -13,7 +13,7 @@
     "queuing",
     "payroll"
   ],
-  "main": "index.fnl",
+  "main": "index.fnls",
   "dependencies": {},
   "benchmarks": {
     "default_reps": 4,

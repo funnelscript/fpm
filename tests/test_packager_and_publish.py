@@ -12,7 +12,7 @@ from fpm.validator.package_check import run_preflight_audit, validate_package_la
 def test_deterministic_tarball_hash(tmp_path: Path):
     pkg_dir = tmp_path / "deterministic_pkg"
     pkg_dir.mkdir()
-    (pkg_dir / "index.fnl").write_text("strategy Main {}", encoding="utf-8")
+    (pkg_dir / "index.fnls").write_text("strategy Main {}", encoding="utf-8")
     (pkg_dir / "README.md").write_text("# Readme", encoding="utf-8")
     (pkg_dir / "fpm.toml").write_text(
         '[package]\nname = "test/det"\nversion = "0.1.0"\ndescription = "desc"\n',
@@ -32,7 +32,7 @@ def test_deterministic_tarball_hash(tmp_path: Path):
 def test_preflight_audit_missing_readme(tmp_path: Path):
     pkg_dir = tmp_path / "pkg_no_readme"
     pkg_dir.mkdir()
-    (pkg_dir / "index.fnl").write_text("strategy A {}", encoding="utf-8")
+    (pkg_dir / "index.fnls").write_text("strategy A {}", encoding="utf-8")
     (pkg_dir / "fpm.toml").write_text(
         '[package]\nname = "test/noreadme"\nversion = "0.1.0"\ndescription = "desc"\n',
         encoding="utf-8",
@@ -47,7 +47,7 @@ def test_preflight_audit_missing_entry(tmp_path: Path):
     pkg_dir.mkdir()
     (pkg_dir / "README.md").write_text("# Readme", encoding="utf-8")
     (pkg_dir / "fpm.toml").write_text(
-        '[package]\nname = "test/noentry"\nversion = "0.1.0"\ndescription = "desc"\nmain = "missing.fnl"\n',
+        '[package]\nname = "test/noentry"\nversion = "0.1.0"\ndescription = "desc"\nmain = "missing.fnls"\n',
         encoding="utf-8",
     )
     with pytest.raises(MissingRequiredFileError) as exc_info:
@@ -58,11 +58,11 @@ def test_preflight_audit_missing_entry(tmp_path: Path):
 def test_preflight_audit_missing_export(tmp_path: Path):
     pkg_dir = tmp_path / "pkg_bad_export"
     pkg_dir.mkdir()
-    (pkg_dir / "index.fnl").write_text("strategy A {}", encoding="utf-8")
+    (pkg_dir / "index.fnls").write_text("strategy A {}", encoding="utf-8")
     (pkg_dir / "README.md").write_text("# Readme", encoding="utf-8")
     (pkg_dir / "fpm.toml").write_text(
         '[package]\nname = "test/badexport"\nversion = "0.1.0"\ndescription = "desc"\n\n'
-        '[modules]\nmissing_mod = "does_not_exist.fnl"\n',
+        '[modules]\nmissing_mod = "does_not_exist.fnls"\n',
         encoding="utf-8",
     )
     with pytest.raises(MissingExportError) as exc_info:
@@ -73,11 +73,11 @@ def test_preflight_audit_missing_export(tmp_path: Path):
 def test_preflight_audit_success(tmp_path: Path):
     pkg_dir = tmp_path / "valid_pkg"
     pkg_dir.mkdir()
-    (pkg_dir / "index.fnl").write_text("strategy A {}", encoding="utf-8")
-    (pkg_dir / "utils.fnl").write_text("entity B {}", encoding="utf-8")
+    (pkg_dir / "index.fnls").write_text("strategy A {}", encoding="utf-8")
+    (pkg_dir / "utils.fnls").write_text("entity B {}", encoding="utf-8")
     (pkg_dir / "README.md").write_text("# Readme", encoding="utf-8")
     (pkg_dir / "fpm.toml").write_text(
-        '[package]\nname = "test/valid"\nversion = "0.1.0"\ndescription = "desc"\n\n[modules]\nutils = "utils.fnl"\n',
+        '[package]\nname = "test/valid"\nversion = "0.1.0"\ndescription = "desc"\n\n[modules]\nutils = "utils.fnls"\n',
         encoding="utf-8",
     )
     report = run_preflight_audit(pkg_dir)

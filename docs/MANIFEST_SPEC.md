@@ -15,16 +15,16 @@
 - **`license`** *(required, string)*: SPDX license identifier (e.g. `MIT`, `Apache-2.0`).
 - **`author`** *(optional, string)*: Author contact info (e.g. `FunnelScript Core Team <core@funnelscript.org>`).
 - **`funnelscript_version`** *(required, string)*: SemVer constraint for compatible FunnelScript language versions (e.g. `>=0.4.0,<1.0.0`).
-- **`entry`** *(optional, string)*: Path to the main entry point file. Defaults to `index.fnl`. `main` is accepted as an alias.
+- **`entry`** *(optional, string)*: Path to the main entry point file. Defaults to `index.fnls`. `main` is accepted as an alias.
 
 ### 2.2 `[modules]` / `[exports]`
-Mapping of symbol or submodule names to their `.fnl` file paths relative to the package root.
+Mapping of symbol or submodule names to their `.fnls` file paths relative to the package root.
 ```toml
 [modules]
-acquisition = "acquisition.fnl"
-fulfillment = "fulfillment.fnl"
-treasury = "treasury.fnl"
-index = "index.fnl"
+acquisition = "acquisition.fnls"
+fulfillment = "fulfillment.fnls"
+treasury = "treasury.fnls"
+index = "index.fnls"
 ```
 
 ### 2.3 `[parameters.<name>]`

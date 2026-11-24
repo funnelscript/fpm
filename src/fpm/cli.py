@@ -46,7 +46,7 @@ def cli(ctx: click.Context, as_json: bool) -> None:
 @click.option("--dir", "target_dir", default=".", help="Directory to initialize")
 @click.pass_context
 def init(ctx: click.Context, name: str, target_dir: str) -> None:
-    """Scaffold a new FunnelScript package (fpm.toml, index.fnl, README.md, .gitignore)."""
+    """Scaffold a new FunnelScript package (fpm.toml, index.fnls, README.md, .gitignore)."""
     as_json = ctx.obj.get("json", False)
     root = Path(target_dir).resolve()
     root.mkdir(parents=True, exist_ok=True)
@@ -64,17 +64,17 @@ def init(ctx: click.Context, name: str, target_dir: str) -> None:
             description=f"FunnelScript package {name}",
             license="MIT",
             funnelscript_version=">=0.4.0",
-            entry="index.fnl",
+            entry="index.fnls",
         )
     except FpmError as e:
         _print_output(e.to_dict(), as_json, f"Error [{e.code}]: {e.message}")
         sys.exit(1)
 
-    manifest = Manifest(package=meta, modules={"index": "index.fnl"})
+    manifest = Manifest(package=meta, modules={"index": "index.fnls"})
     manifest.save_to_file(manifest_file)
 
-    # index.fnl
-    index_file = root / "index.fnl"
+    # index.fnls
+    index_file = root / "index.fnls"
     if not index_file.exists():
         index_file.write_text(
             f'// FunnelScript Package: {name}\n// Entry module\n\nstrategy "{name.replace("/", "_")}" {{\n}}\n',
@@ -98,7 +98,7 @@ def init(ctx: click.Context, name: str, target_dir: str) -> None:
         "status": "success",
         "action": "init",
         "package": name,
-        "files": ["fpm.toml", "index.fnl", "README.md", ".gitignore"],
+        "files": ["fpm.toml", "index.fnls", "README.md", ".gitignore"],
         "path": str(root),
     }
     _print_output(res, as_json, f"Initialized new package '{name}' in {root}")

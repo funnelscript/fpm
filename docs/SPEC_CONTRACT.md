@@ -7,7 +7,7 @@
 ### Boundary Invariant
 To prevent tight coupling and synchronization debt between repositories:
 - `fpm` owns **package lifecycle**: dependency declarations (`fpm.toml`), lockfiles (`fpm.lock`), SemVer resolution, integrity verification (SHA-256), global package caching, package installation into `.fpm/packages/`, and emitting `.fpm/resolution-map.json`.
-- `fpm` does **NOT** compile, parse, or execute `.fnl` files.
+- `fpm` does **NOT** compile, parse, or execute `.fnls` files.
 - `funnelscript` compiler owns **execution and evaluation**: AST parsing, dimensional verification, DEVS discrete event simulation, and runtime execution.
 - `funnelscript` does **NOT** parse `fpm.toml`, compute SemVer, or connect to package registries. It only consumes `.fpm/resolution-map.json` to resolve imports to disk paths.
 
@@ -25,16 +25,16 @@ In early conceptual designs (`docs/fpm.md` in the core language repo), JSON mani
    - `license`: SPDX license identifier string (e.g. `MIT`).
    - `author`: String (e.g. `FunnelScript Core Team <core@funnelscript.org>`).
    - `funnelscript_version`: SemVer range constraint (e.g. `>=0.4.0,<1.0.0`).
-   - `entry`: Relative path to main `.fnl` file (defaults to `index.fnl`; legacy `main` is accepted as an alias).
+   - `entry`: Relative path to main `.fnls` file (defaults to `index.fnls`; legacy `main` is accepted as an alias).
 2. `[modules]` / `[exports]`:
-   - Mapping of export alias to relative `.fnl` file path.
+   - Mapping of export alias to relative `.fnls` file path.
    - Example:
      ```toml
      [modules]
-     acquisition = "acquisition.fnl"
-     fulfillment = "fulfillment.fnl"
-     treasury = "treasury.fnl"
-     index = "index.fnl"
+     acquisition = "acquisition.fnls"
+     fulfillment = "fulfillment.fnls"
+     treasury = "treasury.fnls"
+     index = "index.fnls"
      ```
 3. `[parameters.<name>]`:
    - Declarative parameter metadata for simulation tuning and registry documentation:
@@ -75,13 +75,13 @@ When `fpm install` runs in a FunnelScript project, it:
   "packages": {
     "ecommerce/d2c_scale": {
       "version": "0.1.0",
-      "entry": "/project/.fpm/packages/ecommerce/d2c_scale@0.1.0/index.fnl",
+      "entry": "/project/.fpm/packages/ecommerce/d2c_scale@0.1.0/index.fnls",
       "integrity": "sha256-a1b2c3d4...",
       "modules": {
-        "acquisition": "/project/.fpm/packages/ecommerce/d2c_scale@0.1.0/acquisition.fnl",
-        "fulfillment": "/project/.fpm/packages/ecommerce/d2c_scale@0.1.0/fulfillment.fnl",
-        "treasury": "/project/.fpm/packages/ecommerce/d2c_scale@0.1.0/treasury.fnl",
-        "index": "/project/.fpm/packages/ecommerce/d2c_scale@0.1.0/index.fnl"
+        "acquisition": "/project/.fpm/packages/ecommerce/d2c_scale@0.1.0/acquisition.fnls",
+        "fulfillment": "/project/.fpm/packages/ecommerce/d2c_scale@0.1.0/fulfillment.fnls",
+        "treasury": "/project/.fpm/packages/ecommerce/d2c_scale@0.1.0/treasury.fnls",
+        "index": "/project/.fpm/packages/ecommerce/d2c_scale@0.1.0/index.fnls"
       }
     }
   }

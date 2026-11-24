@@ -32,7 +32,7 @@
           "type": "object"
         },
         "entry": {
-          "default": "index.fnl",
+          "default": "index.fnls",
           "description": "Entry file",
           "title": "Entry",
           "type": "string"

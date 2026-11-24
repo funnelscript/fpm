@@ -17,7 +17,7 @@ def test_cli_init_and_pack(tmp_path: Path, monkeypatch):
     assert res.exit_code == 0
     assert "Initialized new package" in res.output
     assert (tmp_path / "fpm.toml").exists()
-    assert (tmp_path / "index.fnl").exists()
+    assert (tmp_path / "index.fnls").exists()
     assert (tmp_path / "README.md").exists()
     assert (tmp_path / ".gitignore").exists()
 

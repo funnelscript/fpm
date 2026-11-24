@@ -38,7 +38,7 @@ Each package has a single JSON metadata file listing all published versions:
       "integrity": "sha256-d7a8fbb56e13b0a04718534839cf1396b29f0e132952541a73dd708535a7b0a7",
       "funnelscript_version": ">=0.4.0",
       "dependencies": {},
-      "entry": "index.fnl",
+      "entry": "index.fnls",
       "published_at": "2026-11-21T12:00:00Z"
     }
   }
@@ -73,7 +73,7 @@ Package tarballs are `.tar.gz` archives built with deterministic settings:
 Before a package can be accepted by the registry, `fpm` performs:
 1. Manifest validity check (`fpm.toml`).
 2. Verification that `README.md` and `LICENSE` exist and are non-empty.
-3. Verification that `index.fnl` exists and parses cleanly.
+3. Verification that `index.fnls` exists and parses cleanly.
 4. Export check ensuring every symbol mapped in `[modules]` / `[exports]` exists.
 5. Parameter validation ensuring numeric defaults lie within declared `[min, max]` intervals.
 6. Deterministic packaging and output of the exact SHA-256 integrity hash.

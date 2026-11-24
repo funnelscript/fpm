@@ -9,7 +9,7 @@
 1. **Strict Boundary Isolation**:
    - `fpm` owns package manifest validation (`fpm.toml`), deterministic lockfile resolution (`fpm.lock`), SemVer 2.0 evaluation, content-addressed tarball storage, cryptographic verification (SHA-256), and emitting `.fpm/resolution-map.json`.
    - `fpm` must **never** duplicate the FunnelScript parser, AST structures, dimensional checker, or DEVS simulator.
-   - When package `.fnl` validation is required, `fpm` interfaces via `fpm.validator.compiler_hook` by invoking the external `funnelscript` executable.
+   - When package `.fnls` validation is required, `fpm` interfaces via `fpm.validator.compiler_hook` by invoking the external `funnelscript` executable.
 
 2. **Zero-Drift Schema Standard**:
    - All models live in `src/fpm/models/` using Pydantic v2.

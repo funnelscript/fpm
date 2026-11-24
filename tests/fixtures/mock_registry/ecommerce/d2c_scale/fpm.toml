@@ -5,13 +5,13 @@ description = "Flagship FunnelScript D2C scale strategy with dual Prepaid & COD 
 author = "FunnelScript Core Team <core@funnelscript.org>"
 license = "MIT"
 funnelscript_version = ">=0.4.0"
-main = "index.fnl"
+main = "index.fnls"
 
 [modules]
-acquisition = "acquisition.fnl"
-fulfillment = "fulfillment.fnl"
-treasury = "treasury.fnl"
-index = "index.fnl"
+acquisition = "acquisition.fnls"
+fulfillment = "fulfillment.fnls"
+treasury = "treasury.fnls"
+index = "index.fnls"
 
 [parameters.ad_spend_daily]
 type = "float"

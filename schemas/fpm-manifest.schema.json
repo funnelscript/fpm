@@ -117,7 +117,7 @@
           "type": "string"
         },
         "main": {
-          "default": "index.fnl",
+          "default": "index.fnls",
           "description": "Path to primary FunnelScript entry file",
           "title": "Main",
           "type": "string"

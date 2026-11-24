@@ -23,7 +23,7 @@
           "type": "string"
         },
         "entry": {
-          "default": "index.fnl",
+          "default": "index.fnls",
           "description": "Relative path to package entry point",
           "title": "Entry",
           "type": "string"

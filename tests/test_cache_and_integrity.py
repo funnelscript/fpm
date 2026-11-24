@@ -18,7 +18,7 @@ def test_cache_store_and_retrieve(tmp_path: Path):
     # Create dummy package directory
     pkg_dir = tmp_path / "sample_pkg"
     pkg_dir.mkdir()
-    (pkg_dir / "index.fnl").write_text("// FunnelScript", encoding="utf-8")
+    (pkg_dir / "index.fnls").write_text("// FunnelScript", encoding="utf-8")
     (pkg_dir / "README.md").write_text("# Readme", encoding="utf-8")
     (pkg_dir / "fpm.toml").write_text(
         '[package]\nname = "test/pkg"\nversion = "0.1.0"\ndescription = "desc"\n',
@@ -49,7 +49,7 @@ def test_tamper_detection(tmp_path: Path):
     # Create package and tarball
     pkg_dir = tmp_path / "pkg"
     pkg_dir.mkdir()
-    fnl_file = pkg_dir / "index.fnl"
+    fnl_file = pkg_dir / "index.fnls"
     fnl_file.write_text("strategy Test { val = 1.0 USD; }", encoding="utf-8")
 
     tar_file = tmp_path / "pkg.tar.gz"
@@ -58,10 +58,10 @@ def test_tamper_detection(tmp_path: Path):
     # Extract to target directory
     extract_dest = tmp_path / "installed" / "test/pkg@0.1.0"
     cache.extract_tarball(tar_file, extract_dest, expected_integrity=original_digest)
-    assert (extract_dest / "index.fnl").exists()
+    assert (extract_dest / "index.fnls").exists()
 
     # Tamper with single byte in installed file
-    installed_fnl = extract_dest / "index.fnl"
+    installed_fnl = extract_dest / "index.fnls"
     installed_fnl.write_text("strategy Test { val = 2.0 USD; }", encoding="utf-8")
 
     # Re-packing/verifying detects hash mismatch

@@ -56,7 +56,7 @@ def test_lockfile_roundtrip_idempotency(manifest_hash: str, num_pkgs: int):
             version=ver,
             resolved=f"https://registry.funnelscript.org/{name}-{ver}.tar.gz",
             integrity=f"sha256-{i * 11111111}",
-            entry="index.fnl",
+            entry="index.fnls",
             dependencies={},
         )
 

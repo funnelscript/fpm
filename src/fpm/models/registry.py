@@ -16,7 +16,7 @@ class RegistryVersionEntry(BaseModel):
     integrity: str = Field(..., description="SHA-256 digest prefixed with sha256-")
     funnelscript_version: str = Field(default=">=0.1.0", description="Compatible engine constraint")
     dependencies: dict[str, str] = Field(default_factory=dict, description="Package dependencies")
-    entry: str = Field(default="index.fnl", description="Entry file")
+    entry: str = Field(default="index.fnls", description="Entry file")
     published_at: str | None = Field(default=None, description="ISO timestamp")
 
 

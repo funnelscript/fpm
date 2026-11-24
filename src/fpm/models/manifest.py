@@ -40,7 +40,7 @@ class PackageMetadata(BaseModel):
         description="Target FunnelScript compiler engine constraint",
     )
     entry: str = Field(
-        default="index.fnl",
+        default="index.fnls",
         description="Path to primary FunnelScript entry file",
         alias="main",
     )
